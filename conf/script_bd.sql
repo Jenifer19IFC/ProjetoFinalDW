@@ -1,4 +1,4 @@
-- MySQL Workbench Forward Engineering
+-- MySQL Workbench Forward Engineering
 
 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
@@ -25,7 +25,7 @@ CREATE TABLE IF NOT EXISTS `orcamento`.`conta` (
   `saldo` DOUBLE NULL DEFAULT NULL,
   PRIMARY KEY (`conta_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 14
+AUTO_INCREMENT = 29
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS `orcamento`.`usuario` (
   `cpf` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`usuario_id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 45
+AUTO_INCREMENT = 49
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -73,7 +73,7 @@ CREATE TABLE IF NOT EXISTS `orcamento`.`tdespesa` (
   `categoria` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 21
+AUTO_INCREMENT = 22
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -111,13 +111,10 @@ CREATE TABLE IF NOT EXISTS `orcamento`.`endereco` (
   `usuario_id` INT(11) NOT NULL,
   `bairro` VARCHAR(45) NULL DEFAULT NULL,
   `cidade` VARCHAR(45) NULL DEFAULT NULL,
-
-    INDEX `fk_endereco_usuario1_idx` (`usuario_usuario_id` ASC),
-  CONSTRAINT `fk_endereco_usuario1`
-    FOREIGN KEY (`usuario_usuario_id`)
-    REFERENCES `orcamento`.`usuario` (`usuario_id`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+  INDEX `usuario_id` (`usuario_id` ASC),
+  CONSTRAINT `endereco_ibfk_1`
+    FOREIGN KEY (`usuario_id`)
+    REFERENCES `orcamento`.`usuario` (`usuario_id`))
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8;
 
@@ -130,7 +127,7 @@ CREATE TABLE IF NOT EXISTS `orcamento`.`treceita` (
   `categoria` VARCHAR(45) NULL DEFAULT NULL,
   PRIMARY KEY (`id`))
 ENGINE = InnoDB
-AUTO_INCREMENT = 13
+AUTO_INCREMENT = 15
 DEFAULT CHARACTER SET = utf8;
 
 
@@ -157,7 +154,7 @@ CREATE TABLE IF NOT EXISTS `orcamento`.`receita` (
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
-AUTO_INCREMENT = 26
+AUTO_INCREMENT = 27
 DEFAULT CHARACTER SET = utf8;
 
 
