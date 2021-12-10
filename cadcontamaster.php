@@ -159,20 +159,19 @@
 
             <?php 
             $sql = "SELECT * FROM despesa
-            where despesa.conta_conta_id = 9
+            where despesa.conta_conta_id = $codigo
             ORDER BY despesa.data;";
             $result = mysqli_query($conexao,$sql);
-            while ($row = mysqli_fetch_array($result))  {         
+            while ($row = mysqli_fetch_array($result))  {     
                 ?>
                 <tr>
                     <td align="center"><?php echo $row['id'];?></td>
                     <td width="400"><?php echo $row['valor'];?></td>
                     <td><?php echo dataTracoToPadrao($row['data']);?></td>
                     <td><?php echo $row['tipo_despesa_id'];?></td>
-
-                    <td><a href="javascript:excluirRegistro('acaocontamaster.php?acao=excluir&receita=<?php echo $row['id'];?>&conta=<?php echo $codigo;?>')"><img border="0" src="img/delete.png" alt="Excluir"></a></td>
+                    <td><a href="javascript:excluirRegistro('acaocontamaster.php?acao=excluirDespesa&despesa=<?php echo $row['id'];?>&conta_id=<?php echo $row['conta_conta_id'];?>')"><img border="0" src="img/delete.png" alt="Excluir"></a></td>
                 </tr>
-                <?php } 
+                <?php }
                 ?>
 <?php } 
                 ?>
@@ -257,7 +256,7 @@
                     <td><?php echo dataTracoToPadrao($row['data']);?></td>
                     <td><?php echo $row['tipo_receita_id'];?></td>
 
-                    <td><a href="javascript:excluirRegistro('acaocontamaster.php?acao=excluirReceita&receita=<?php echo $row['id'];?>&conta=<?php echo $codigo;?>')"><img border="0" src="img/delete.png" alt="Excluir"></a></td>
+                    <td><a href="javascript:excluirRegistro('acaocontamaster.php?acao=excluirReceita&receita=<?php echo $row['id'];?>&conta_id=<?php echo $row['conta_id'];?>')"><img border="0" src="img/delete.png" alt="Excluir"></a></td>
                 </tr>
                 <?php } 
                 ?>

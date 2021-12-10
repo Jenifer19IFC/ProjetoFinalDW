@@ -10,12 +10,13 @@
 	if ($acao == "excluirUsuario"){
 		$conta = $_GET['conta'];
 		$usuario = $_GET['usuario'];
-		excluirUsuario($conta,$receita);
+		excluirUsuario($conta,$usuario);
+	}else if($acao == "excluirDespesa"){
+		$codigo = $_GET["despesa"];
+		excluirDespesa($codigo);
 	}else if($acao == "excluirReceita"){
-		$conta = $_GET['conta'];
-		$receita = $_GET['receita'];
-		excluirReceita($conta,$receita);
-		
+		$codigo = $_GET["receita"];
+		excluirReceita($codigo);
 	}
 	else if ($acao == "excluir"){
 		$codigo = 0;
@@ -60,23 +61,35 @@
 		header('location:cadcontamaster.php?acao=editar&conta_id='.$conta);
 	}
 
-	function excluirReceita($conta,$receita){
-		$sql = "
-			DELETE 
-			  FROM {$GLOBALS['receita']}
-	         WHERE id = :receita
-		       AND conta_id = :conta;
-		";
 
-		$pdo = Conexao::getInstance();
-		$stmt = $pdo->prepare($sql);
-        $stmt->bindParam(':receita', $receita, PDO::PARAM_INT);
-		$stmt->bindParam(':conta', $conta, PDO::PARAM_INT);
-		$stmt->execute();
+	function excluirDespesa($codigo){
+		//var_dump($codigo);
+	$sql = "
+		DELETE FROM despesa WHERE id = :id;";
 
-		header('location:cadcontamaster.php?acao=editar&conta_id='.$conta);
+	$pdo = Conexao::getInstance();
+	$stmt = $pdo->prepare($sql);
+	$stmt->bindParam(':id', $codigo, PDO::PARAM_INT);
+	$stmt->execute();
+
+	header('location:cadcontamaster.php?acao=editar&conta_id='.$_GET['conta_id']);
+
 	}
 	
+	function excluirReceita($codigo){
+		//var_dump($codigo);
+	$sql = "
+		DELETE FROM receita WHERE id = :id;";
+
+	$pdo = Conexao::getInstance();
+	$stmt = $pdo->prepare($sql);
+	$stmt->bindParam(':id', $codigo, PDO::PARAM_INT);
+	$stmt->execute();
+
+	header('location:cadcontamaster.php?acao=editar&conta_id='.$_GET['conta_id']);
+
+	}
+
 	function adicionarUsuario($codigo,$usuario){
 		$sql = 'INSERT INTO '.$GLOBALS['tb_conta_has_usuario'].
 		       ' (conta_conta_id, usuario_usuario_id)'. 
@@ -150,6 +163,7 @@
 	function carregaBDParaVetor($codigo){
 		$sql = 'SELECT * FROM '.$GLOBALS['tb_conta'].
 		       ' WHERE conta_id = '.$codigo;
+			   //var_dump($sql);
 		$result = mysqli_query($GLOBALS['conexao'],$sql);
 		$dados = array();
 		while ($row = mysqli_fetch_array($result)){
