@@ -52,6 +52,7 @@ require_once "conf/Conexao.php";
 <body>
 <?php
     include  "menu.php" ;
+    include 'util/util.php';
     $title = "";
     $tipo = isset($_POST['tipo']) ? $_POST['tipo'] : "3";
     $procurar = isset($_POST['procurar']) ? $_POST['procurar'] : "";
@@ -114,7 +115,7 @@ require_once "conf/Conexao.php";
                 <tr>
                     <td><?php echo $linha['id']; ?></td>
                     <td><?php echo $linha['valor']; ?></td>
-                    <td><?php echo $linha['data']; ?></td>
+                    <td><?php echo dataTracoToPadrao($linha['data']); ?></td>
                     <td><?php echo $linha['categoria']; ?></td>
                     <td><a href='caddespesa.php?acao=editar&id=<?php echo $linha['id']; ?>'><img class="icon" src="img/edit.png" alt=""></a></td>
                     <td><a href="javascript:excluirRegistro('acaodespesa.php?acao=excluir&id=<?php echo $linha['id']; ?>')"><img class="icon" src="img/delete.png" alt=""></a></td>

@@ -52,6 +52,7 @@ require_once "conf/Conexao.php";
 <body>
 <?php
     include  "menu.php" ;
+    include 'util/util.php';
 ?>
     <a href="cadreceita.php">Nova Receita</a><br><br>
     <form method="POST">
@@ -112,7 +113,7 @@ require_once "conf/Conexao.php";
                 <tr>
                     <td><?php echo $linha['id']; ?></td>
                     <td><?php echo $linha['valor']; ?></td>
-                    <td><?php echo $linha['data']; ?></td>
+                    <td><?php echo dataTracoToPadrao($linha['data']); ?></td>
                     <td><?php echo $linha['categoria']; ?></td>
                     <td><a href='cadreceita.php?acao=editar&id=<?php echo $linha['id']; ?>'><img class="icon" src="img/edit.png" alt=""></a></td>
                     <td><a href="javascript:excluirRegistro('acaoreceita.php?acao=excluir&id=<?php echo $linha['id']; ?>')"><img class="icon" src="img/delete.png" alt=""></a></td>
