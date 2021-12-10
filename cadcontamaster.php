@@ -40,6 +40,7 @@
 </head>
 <body>
     <?php include 'menu.php'; ?>
+    <?php include 'util/util.php';?>
     <form action="acaocontamaster.php" id="form" method="post">
         <fieldset>
             <legend><?php echo $title; ?></legend>
@@ -110,14 +111,166 @@
                             </tr>
                             <?php } 
                             ?>
+                            <?php } ?>
                         </table> 
-                        <table width="100%"   border="1" align="left" id='painel'>
-                         <tr>
-
-                        </tr>      
-                    </table>
-                    <?php } ?>
                 </fieldset>
             </form>
+                  
+
+<BR></BR>
+            <?php if ($acao == "editar"){ ?>
+                <h4><b><?php echo "DESPESAS";?></b></h4>
+<table width="100%"   border="1" align="left" id='painel'>
+    <tr><tr>
+        <td width="90" align="center"><b>VALOR|DATA</b></td>
+        <td width="120" align="right"><b></b></td>
+    </tr>
+    <tr>
+        <td width="90" align="center">
+            <select name="despesa" id="despesa">
+                <?php
+                $sql = "SELECT * FROM despesa";
+                echo $sql;
+                $result = mysqli_query($conexao,$sql);
+                while ($row = mysqli_fetch_array($result)) {      
+                    ?>
+                    <option value="<?php echo $row[0];?>">
+                        <?php echo $row[1]." | ".$row[2];?></option>
+                        <?php } ?>
+                    </select>
+                </td>
+                <td width="120" align="right">
+                    <button name="acao" id="acao" value="addDespesa"  type="submit" onclick="return validaAddProd();">
+                        <img src="img/add.png" alt="Adicionar Despesa"> 
+                    </button><br><br>
+                </td>
+            </tr>
+        </table>
+        <br><br>
+
+        <table width="100%"   border="1" align="left" id='painel'>
+            <tr>
+                <td width="90" align="center"><b>Código</b></td>
+                <td width="400" ><b>Valor</b></td>
+                <td width="400" ><b>Data</b></td>
+                <td width="400" ><b>Categoria</b></td>
+                <td width="20" ></td>
+            </tr>
+
+            <?php 
+            $sql = "SELECT * FROM despesa
+            where despesa.conta_conta_id = 9
+            ORDER BY despesa.data;";
+            $result = mysqli_query($conexao,$sql);
+            while ($row = mysqli_fetch_array($result))  {         
+                ?>
+                <tr>
+                    <td align="center"><?php echo $row['id'];?></td>
+                    <td width="400"><?php echo $row['valor'];?></td>
+                    <td><?php echo dataTracoToPadrao($row['data']);?></td>
+                    <td><?php echo $row['tipo_despesa_id'];?></td>
+
+                    <td><a href="javascript:excluirRegistro('acaocontamaster.php?acao=excluir&receita=<?php echo $row['id'];?>&conta=<?php echo $codigo;?>')"><img border="0" src="img/delete.png" alt="Excluir"></a></td>
+                </tr>
+                <?php } 
+                ?>
+<?php } 
+                ?>
+            </table> 
+    </fieldset>
+</form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <?php if ($acao == "editar"){ ?>
+
+<table width="100%"   border="1" align="left" id='painel'>
+    <tr><tr>
+        <td width="90" align="center"><b>VALOR|DATA</b></td>
+        <td width="120" align="right"><b></b></td>
+    </tr>
+    <tr>
+        <td width="90" align="center">
+            <select name="receita" id="receita">
+                <?php
+                $sql = "SELECT * FROM receita";
+                echo $sql;
+                $result = mysqli_query($conexao,$sql);
+                while ($row = mysqli_fetch_array($result)) {      
+                    ?>
+                    <option value="<?php echo $row[0];?>">
+                        <?php echo $row[1]." | ".$row[2];?></option>
+                        <?php } ?>
+                    </select>
+                </td>
+                <td width="120" align="right">
+                    <button name="acao" id="acao" value="addReceita"  type="submit" onclick="return validaAddProd();">
+                        <img src="img/add.png" alt="Adicionar Receita"> 
+                    </button><br><br>
+                </td>
+            </tr>
+        </table>
+        <br><br>
+
+        <h4><b><?php echo "RECEITAS";?></b></h4>
+        <table width="100%"   border="1" align="left" id='painel'>
+            <tr>
+                <td width="90" align="center"><b>Código</b></td>
+                <td width="400" ><b>Valor</b></td>
+                <td width="400" ><b>Data</b></td>
+                <td width="400" ><b>Categoria</b></td>
+                <td width="20" ></td>
+            </tr>
+
+            <?php 
+            $sql = "SELECT * FROM receita
+            WHERE receita.conta_id = $codigo
+            ORDER BY receita.data;";
+            $result = mysqli_query($conexao,$sql);
+            while ($row = mysqli_fetch_array($result))  {         
+                ?>
+                <tr>
+                    <td align="center"><?php echo $row['id'];?></td>
+                    <td width="400"><?php echo $row['valor'];?></td>
+                    <td><?php echo dataTracoToPadrao($row['data']);?></td>
+                    <td><?php echo $row['tipo_receita_id'];?></td>
+
+                    <td><a href="javascript:excluirRegistro('acaocontamaster.php?acao=excluirReceita&receita=<?php echo $row['id'];?>&conta=<?php echo $codigo;?>')"><img border="0" src="img/delete.png" alt="Excluir"></a></td>
+                </tr>
+                <?php } 
+                ?>
+                <?php } ?>
+            </table> 
+    </fieldset>
+</form>
+
+
+
+
+
+
+
         </body>
         </html>

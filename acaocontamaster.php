@@ -10,8 +10,14 @@
 	if ($acao == "excluirUsuario"){
 		$conta = $_GET['conta'];
 		$usuario = $_GET['usuario'];
-		excluirUsuario($conta,$usuario);
-	}else if ($acao == "excluir"){
+		excluirUsuario($conta,$receita);
+	}else if($acao == "excluirReceita"){
+		$conta = $_GET['conta'];
+		$receita = $_GET['receita'];
+		excluirReceita($conta,$receita);
+		
+	}
+	else if ($acao == "excluir"){
 		$codigo = 0;
 		if (isset($_GET["conta_id"])){
 		  	$codigo = $_GET["conta_id"];
@@ -35,7 +41,8 @@
 				adicionarUsuario($codigo,$usuario);
 			}
 	}
-
+//--------------
+	
 	function excluirUsuario($conta,$usuario){
 		$sql = "
 			DELETE 
@@ -52,11 +59,40 @@
 
 		header('location:cadcontamaster.php?acao=editar&conta_id='.$conta);
 	}
+
+	function excluirReceita($conta,$receita){
+		$sql = "
+			DELETE 
+			  FROM {$GLOBALS['receita']}
+	         WHERE id = :receita
+		       AND conta_id = :conta;
+		";
+
+		$pdo = Conexao::getInstance();
+		$stmt = $pdo->prepare($sql);
+        $stmt->bindParam(':receita', $receita, PDO::PARAM_INT);
+		$stmt->bindParam(':conta', $conta, PDO::PARAM_INT);
+		$stmt->execute();
+
+		header('location:cadcontamaster.php?acao=editar&conta_id='.$conta);
+	}
 	
 	function adicionarUsuario($codigo,$usuario){
 		$sql = 'INSERT INTO '.$GLOBALS['tb_conta_has_usuario'].
 		       ' (conta_conta_id, usuario_usuario_id)'. 
 		       ' VALUES ('.$codigo.','.$usuario.')';
+		$result = mysqli_query($GLOBALS['conexao'],$sql);
+		if ($result == 1)
+			header('location:cadcontamaster.php?msg="si"&acao=editar&conta_id='.$codigo);
+		else
+			header('location:cadcontamaster.php?msg="er"&acao=editar&conta_id='.$codigo);
+            echo $sql;
+	}
+
+	function adicionarReceita($codigo,$receita){
+		$sql = 'INSERT INTO '.$GLOBALS['receita'].
+		       ' (conta_conta_id, id)'. 
+		       ' VALUES ('.$codigo.','.$receita.')';
 		$result = mysqli_query($GLOBALS['conexao'],$sql);
 		if ($result == 1)
 			header('location:cadcontamaster.php?msg="si"&acao=editar&conta_id='.$codigo);
