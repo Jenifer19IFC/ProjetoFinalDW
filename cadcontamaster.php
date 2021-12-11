@@ -77,7 +77,7 @@
                             </td>
                             <td width="120" align="right">
                                 <button name="acao" id="acao" value="addUsuario"  type="submit" onclick="return validaAddProd();">
-                                    <img src="img/add.png" alt="Adicionar Usuario"> 
+                                    <img src="img/add.png" alt="AddUsuario"> 
                                 </button><br><br>
                             </td>
                         </tr>
@@ -114,33 +114,22 @@
                             <?php } ?>
                         </table> 
                 </fieldset>
-            </form>
+
                   
 
 <BR></BR>
             <?php if ($acao == "editar"){ ?>
-                <h4><b><?php echo "DESPESAS";?></b></h4>
+
 <table width="100%"   border="1" align="left" id='painel'>
     <tr><tr>
-        <td width="90" align="center"><b>VALOR|DATA</b></td>
-        <td width="120" align="right"><b></b></td>
     </tr>
     <tr>
         <td width="90" align="center">
-            <select name="despesa" id="despesa">
-                <?php
-                $sql = "SELECT * FROM despesa";
-                echo $sql;
-                $result = mysqli_query($conexao,$sql);
-                while ($row = mysqli_fetch_array($result)) {      
-                    ?>
-                    <option value="<?php echo $row[0];?>">
-                        <?php echo $row[1]." | ".$row[2];?></option>
-                        <?php } ?>
-                    </select>
                 </td>
+                <h4><b><?php echo "DESPESAS";?></b></h4>
                 <td width="120" align="right">
-                    <button name="acao" id="acao" value="addDespesa"  type="submit" onclick="return validaAddProd();">
+                <?php echo "<b>Adicionar despesa</b>" ?>
+                <a href = "caddespesa.php?conta_id=<?php echo $codigo ?>" >
                         <img src="img/add.png" alt="Adicionar Despesa"> 
                     </button><br><br>
                 </td>
@@ -177,8 +166,7 @@
                 ?>
             </table> 
     </fieldset>
-</form>
-
+<br><br>
 
 
 
@@ -207,27 +195,15 @@
 
 <table width="100%"   border="1" align="left" id='painel'>
     <tr><tr>
-        <td width="90" align="center"><b>VALOR|DATA</b></td>
-        <td width="120" align="right"><b></b></td>
     </tr>
     <tr>
         <td width="90" align="center">
-            <select name="receita" id="receita">
-                <?php
-                $sql = "SELECT * FROM receita";
-                echo $sql;
-                $result = mysqli_query($conexao,$sql);
-                while ($row = mysqli_fetch_array($result)) {      
-                    ?>
-                    <option value="<?php echo $row[0];?>">
-                        <?php echo $row[1]." | ".$row[2];?></option>
-                        <?php } ?>
-                    </select>
                 </td>
                 <td width="120" align="right">
-                    <button name="acao" id="acao" value="addReceita"  type="submit" onclick="return validaAddProd();">
+                <b><?php echo "Adicionar receita" ?></b>
+                    <a href = "cadreceita.php?conta_id=<?php echo $codigo ?>" >
                         <img src="img/add.png" alt="Adicionar Receita"> 
-                    </button><br><br>
+                </a><br><br>
                 </td>
             </tr>
         </table>
@@ -264,12 +240,5 @@
             </table> 
     </fieldset>
 </form>
-
-
-
-
-
-
-
-        </body>
-        </html>
+ </body>
+</html>

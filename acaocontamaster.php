@@ -40,7 +40,14 @@
 				$usuario = $_POST['usuario'];
 				$codigo = $_POST['conta_id'];
 				adicionarUsuario($codigo,$usuario);
+			}else if($acao == "addReceita"){
+				$conta = $_POST['conta_id'];
+				$codigo = $_POST['receita'];
+				//adicionarReceita($codigo);
+				var_dump($conta,$codigo);
 			}
+
+
 	}
 //--------------
 	
@@ -102,9 +109,9 @@
             echo $sql;
 	}
 
-	function adicionarReceita($codigo,$receita){
+	function adicionarReceita($codigo){
 		$sql = 'INSERT INTO '.$GLOBALS['receita'].
-		       ' (conta_conta_id, id)'. 
+		       ' (id)'. 
 		       ' VALUES ('.$codigo.','.$receita.')';
 		$result = mysqli_query($GLOBALS['conexao'],$sql);
 		if ($result == 1)
@@ -113,7 +120,7 @@
 			header('location:cadcontamaster.php?msg="er"&acao=editar&conta_id='.$codigo);
             echo $sql;
 	}
-	
+
 	function excluir($codigo){
 		$sql = 'DELETE FROM '.$GLOBALS['tb_conta_has_usuario'].
 		       ' WHERE conta_conta_id =  '.$codigo;

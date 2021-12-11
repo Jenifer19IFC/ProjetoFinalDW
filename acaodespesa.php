@@ -75,7 +75,7 @@ function inserir()
 
     $stmt->execute();
 
-    header("location:caddespesa.php");
+    header("location:cadcontamaster.php?acao=editar&conta_id=$conta");
 
 }
 

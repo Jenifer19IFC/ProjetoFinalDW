@@ -42,18 +42,17 @@
         </select>
         <br><br>
         <label for="">ID conta</label>
-        <select name="conta" id="conta">
+        <input readonly name="conta" value= " <?php echo $_GET['conta_id'] ?>">
             <?php
-            $sql = "SELECT * FROM conta;";
+            /*$sql = "SELECT * FROM conta;";
             $result = mysqli_query($conexao, $sql);
             while ($row = mysqli_fetch_array($result)) {
                 echo '<option value="' . $row['conta_id'] . '"';
                 if ($acao == "editar" && $dados['conta'] == $row['conta_id'])
                     echo ' selected';
                 echo '>' . $row['conta_id'] . '</option>';
-            }
+            }*/
             ?>
-        </select>
         <br><br>
         <label for="">Valor da receita</label>
         <input required=true placeholder="valor" type="text" name="valor" id="valor" value="<?php if ($acao == "editar") echo $dados['valor']; ?>"><br>
