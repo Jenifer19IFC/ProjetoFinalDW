@@ -169,29 +169,6 @@
     </fieldset>
 <br><br>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             <?php if ($acao == "editar"){ ?>
 
 <table width="100%"   border="1" align="left" id='painel'>
