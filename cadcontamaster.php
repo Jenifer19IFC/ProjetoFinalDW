@@ -158,6 +158,7 @@
                     <td width="400"><?php echo $row['valor'];?></td>
                     <td><?php echo dataTracoToPadrao($row['data']);?></td>
                     <td><?php echo $row['tipo_despesa_id'];?></td>
+                    <td style="padding-right:15px"><a href="caddespesa.php?acao=editar&id=<?php echo $row['id'];?>&conta_id=<?php echo $row['conta_conta_id'];?>"><img border="0" src="img/edit.png" alt="Alterar"></a></td>
                     <td><a href="javascript:excluirRegistro('acaocontamaster.php?acao=excluirDespesa&despesa=<?php echo $row['id'];?>&conta_id=<?php echo $row['conta_conta_id'];?>')"><img border="0" src="img/delete.png" alt="Excluir"></a></td>
                 </tr>
                 <?php }
@@ -197,15 +198,13 @@
     <tr><tr>
     </tr>
     <tr>
-        <td width="90" align="center">
-                </td>
                 <td width="120" align="right">
+                <br><br>
                 <b><?php echo "Adicionar receita" ?></b>
                     <a href = "cadreceita.php?conta_id=<?php echo $codigo ?>" >
                         <img src="img/add.png" alt="Adicionar Receita"> 
                 </a><br><br>
-                </td>
-            </tr>
+            
         </table>
         <br><br>
 
@@ -231,7 +230,7 @@
                     <td width="400"><?php echo $row['valor'];?></td>
                     <td><?php echo dataTracoToPadrao($row['data']);?></td>
                     <td><?php echo $row['tipo_receita_id'];?></td>
-
+                    <td style="padding-right:15px"><a href="cadreceita.php?acao=editar&id=<?php echo $row['id'];?>&conta_id=<?php echo $row['conta_id'];?>"><img border="0" src="img/edit.png" alt="Alterar"></a></td>
                     <td><a href="javascript:excluirRegistro('acaocontamaster.php?acao=excluirReceita&receita=<?php echo $row['id'];?>&conta_id=<?php echo $row['conta_id'];?>')"><img border="0" src="img/delete.png" alt="Excluir"></a></td>
                 </tr>
                 <?php } 

@@ -50,10 +50,8 @@ function alterar($codigo)
         ', data = "' . $vet['data'] . '"' .
         ' WHERE id = ' . $codigo;
     $result = mysqli_query($GLOBALS['conexao'], $sql);
-    if ($result == 1)
-        header('location:caddespesa.php?msg="sa"&acao=editar&id=' . $codigo);
-    else
-        header('location:caddespesa.php?msg="er"&acao=editar&id=' . $codigo);
+    
+    header("location:cadcontamaster.php?acao=editar&conta_id=".$vet['conta']);
 }
 
 function inserir()

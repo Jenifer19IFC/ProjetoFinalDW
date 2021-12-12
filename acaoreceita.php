@@ -43,16 +43,16 @@ function excluir($codigo)
 function alterar($codigo)
 {
     $vet = carregarTelaParaVetor();
+    //var_dump($vet);
     $sql = 'UPDATE ' . $GLOBALS['tb_receita'] .
         ' SET tipo_receita_id = "' . $vet['treceita'] . '"' .
         ', conta_id = ' . $vet['conta'] .
         ', valor = "' . $vet['valor'] . '"' .
+        ', data = "' . $vet['data'] . '"' .
         ' WHERE id = ' . $codigo;
     $result = mysqli_query($GLOBALS['conexao'], $sql);
-    if ($result == 1)
-        header('location:cadreceita.php?msg="sa"&acao=editar&id=' . $codigo);
-    else
-        header('location:cadreceita.php?msg="er"&acao=editar&id=' . $codigo);
+    
+    header("location:cadcontamaster.php?acao=editar&conta_id=".$vet['conta']);
 }
 
 function inserir()
